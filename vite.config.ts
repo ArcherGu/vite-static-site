@@ -4,6 +4,8 @@ import VitePages from 'vite-plugin-pages';
 import { resolve } from 'path';
 import fs from 'fs-extra';
 import matter from 'gray-matter';
+import ViteMarkdown from 'vite-plugin-md';
+import ViteComponents from 'vite-plugin-components';
 
 export default defineConfig({
     plugins: [
@@ -25,6 +27,13 @@ export default defineConfig({
 
                 return route;
             },
+        }),
+
+        ViteMarkdown(),
+
+        ViteComponents({
+            extensions: ['vue', 'md'],
+            customLoaderMatcher: path => path.endsWith('.md'),
         }),
     ],
 });
